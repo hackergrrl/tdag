@@ -88,6 +88,16 @@ sww@figure8 $ tg ready
 
 ```
 
+## Background: Operation
+
+`tg` manipulates a file named `todo.json` in your current directory. This is
+nice for easy per-project use, but might not always be desirable and may change
+in the future.
+
+`tg` operates on a plain JSON file. This is convenient right now, but may change
+in the future. However, tdag will always operate on *human readable text
+formats*!
+
 ## Contribute
 
 PRs gladly accepted! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
