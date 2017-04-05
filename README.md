@@ -15,6 +15,12 @@
 - [Contribute](#contribute)
 - [License](#license)
 
+## Stability: Experimental
+
+I'm still experimenting regularly with tdag: its current state may not reflect
+its future state much at all. Use with caution: commands or underlying database
+structure may change without warning!
+
 ## Background
 
 So many task management systems structure tasks as lists, or, in the better
