@@ -13,7 +13,7 @@ if (process.argv.length <= 2) {
 if (args._[2] === 'add') {
   var parentId = Number(args._[3])
   var description = args._.slice(4).join(' ')
-  if (typeof parentId !== 'number') {
+  if (isNaN(parentId)) {
     parentId = undefined
     description = args._.slice(3).join(' ')
   }
