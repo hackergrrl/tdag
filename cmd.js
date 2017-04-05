@@ -150,7 +150,7 @@ function getTaskState (db, id) {
       var states = task.deps.map(function (id) {
         return getTaskState(db, id)
       })
-      return states.some((state) => state === 'ready')
+      return states.some((state) => state === 'ready' || state === 'semi-ready')
     }
   }
 
