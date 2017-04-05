@@ -5,7 +5,7 @@
   "bin": {
     "tg": "cmd.js"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "git://github.com/noffle/tdag.git"
   },
