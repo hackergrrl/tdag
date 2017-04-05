@@ -52,22 +52,8 @@ else if (args._[2] === 'ready') {
 
   var indent = 0
   tasks.forEach(function (id) {
-    indent = 1
-    print(id)
+    printDepTree(db, id)
   })
-
-  function print (id) {
-    var task = db.tasks[id]
-    var state = getTaskState(db, id)
-    var sigil = getStateSymbol(state)
-    var text = getStateTextColorFn(state)(task.description)
-    console.log(whitespace(indent) + id + '   ' + sigil + ' ' + text)
-    var origIndent = indent + 2
-    task.deps.forEach(function (id) {
-      indent = origIndent
-      print(id)
-    })
-  }
 }
 
 else if (args._.length === 4 && args._[2] === 'done') {
@@ -83,8 +69,11 @@ else if (args._.length === 4 && args._[2] === 'done') {
   }
 }
 
-else {
-  // TODO: look up a specific task by its ID
+// look up a specific task by its ID
+else if (args._.length === 3) {
+  var id = args._[2]
+  var db = load()
+  printDepTree(db, id)
 }
 
 function exit (code) {
@@ -174,10 +163,23 @@ function getStateTextColorFn (state) {
 function oops (id) {
   throw new Error('oops, I did not consider this case! fix me! id = ' + id)
 }
-// tdag
-//   lists all top-level items
-// tdag add "fix hyperlog dataset issues"
-//   insert todo at root, print ID
-// tdag add-dep ID "regen waoroni log /wo corruption"
-//   add todo that is a dep of todo ID
+
+function printDepTree (db, id) {
+
+  var indent = 0
+  print(id)
+
+  function print (id) {
+    var task = db.tasks[id]
+    var state = getTaskState(db, id)
+    var sigil = getStateSymbol(state)
+    var text = getStateTextColorFn(state)(task.description)
+    console.log(whitespace(indent) + id + '   ' + sigil + ' ' + text)
+    var origIndent = indent + 2
+    task.deps.forEach(function (id) {
+      indent = origIndent
+      print(id)
+    })
+  }
+}
 
