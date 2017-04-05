@@ -3,7 +3,7 @@
   "description": "manage tasks as a directed acyclic graph",
   "author": "Stephen Whitmore <sww@eight.net>",
   "bin": {
-    "td": "cmd.js"
+    "tg": "cmd.js"
   },
   "version": "0.0.0",
   "repository": {
