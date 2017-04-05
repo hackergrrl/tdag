@@ -65,6 +65,29 @@ USAGE: tg
 
 ```
 
+## Example Use
+
+TODO: expand on this!
+
+```
+sww@figure8 $ tg ready
+0   ° Try to use tdag for a real project
+  1   » foo
+    2   ✓ bar
+  2   ✓ bar
+  3   » finish readme
+
+sww@figure8 $ tg done 3
+
+sww@figure8 $ tg ready
+0   ° Try to use tdag for a real project
+  1   » foo
+    2   ✓ bar
+  2   ✓ bar
+  3   ✓ finish readme
+
+```
+
 ## Contribute
 
 PRs gladly accepted! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
