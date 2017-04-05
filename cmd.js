@@ -11,7 +11,13 @@ if (process.argv.length <= 2) {
 }
 
 if (args._[2] === 'add') {
-  var description = args._.slice(3).join(' ')
+  var parentId = Number(args._[3])
+  var description = args._.slice(4).join(' ')
+  if (typeof parentId !== 'number') {
+    parentId = undefined
+    description = args._.slice(3).join(' ')
+  }
+
   var db = load()
   var idx = db.idx++
   var task = {
@@ -20,9 +26,8 @@ if (args._[2] === 'add') {
     state: 'todo'
   }
 
-  var pId = defined(args.parent, args.p, undefined)
-  if (pId !== undefined) {
-    var parent = db.tasks[pId]
+  if (parentId !== undefined) {
+    var parent = db.tasks[parentId]
     parent.deps.push(idx)
   }
 
@@ -39,7 +44,7 @@ else if (args._[2] === 'query') {
   Object.keys(db.tasks).forEach(function (id) {
     var task = db.tasks[id]
     if (getParents(db, id).length === 0) {
-      console.log(id + '   ° ' + task.description)
+      printDepTree(db, id)
     }
   })
 

@@ -1,11 +1,22 @@
-USAGE: tdag
+USAGE: tg
 
-  tdag
-    lists all top-level items
+  tg
+    lists this help
 
-  tdag add "fix hyperlog dataset issues"
-    insert todo at root, print ID
+  tg add "fix hyperlog dataset issues"
+    insert task at root
 
-  tdag add-dep ID "regen waoroni log /wo corruption"
-    add todo that is a dep of todo ID
+  tg add ID "regen waoroni log /wo corruption"
+    add task that is a dependency of todo #ID
 
+  tg ID
+    print the dependency tree rooted at ID
+
+  tg query
+    print all top-level tasks
+
+  tg ready
+    print all tasks that are ready to be worked on
+
+  tg done ID
+    mark a task as done
