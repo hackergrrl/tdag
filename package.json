@@ -1,0 +1,22 @@
+{
+  "name": "tdag",
+  "description": "manage tasks as a directed acyclic graph",
+  "author": "Stephen Whitmore <sww@eight.net>",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git://github.com/noffle/tdag.git"
+  },
+  "homepage": "https://github.com/noffle/tdag",
+  "bugs": "https://github.com/noffle/tdag/issues",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
+  "keywords": [
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "~10.0.0"
+  },
+  "license": "ISC"
+}
