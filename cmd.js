@@ -135,8 +135,17 @@ function getTaskState (db, id) {
     return db.tasks[id].state === 'done'
   }
 
+  function readySomewhere (id) {
+    var task = db.tasks[id]
+    if (task.state === 'done') return false
+    else if (task.deps.length === 0) return true
+    else return task.deps.map(readySomewhere).some((v) => v === true)
+  }
+
   if (task.state === 'todo' && task.deps.every(done)) {
     return 'ready'
+  } else if (readySomewhere(id)) {
+    return 'semi-ready'
   } else if (task.state === 'todo' && !task.deps.every(done)) {
     return 'blocked'
   } else if (task.state === 'done') {
@@ -147,15 +156,17 @@ function getTaskState (db, id) {
 }
 
 function getStateSymbol (state) {
-  if (state === 'ready') return chalk.blue('o')
-  else if (state === 'done') return chalk.green('✓')
+  if (state === 'ready') return chalk.green('»')
+  else if (state === 'semi-ready') return chalk.bold.yellow('°')
+  else if (state === 'done') return chalk.gray('✓')
   else if (state === 'blocked') return chalk.red('✖')
   else oops(2)
 }
 
 function getStateTextColorFn (state) {
-  if (state === 'ready') return chalk.bold.blue
-  else if (state === 'done') return chalk.bold.green
+  if (state === 'ready') return chalk.bold.green
+  else if (state === 'semi-ready') return chalk.yellow
+  else if (state === 'done') return chalk.gray
   else if (state === 'blocked') return chalk.bold.red
   else oops(3)
 }
@@ -164,7 +175,8 @@ function oops (id) {
   throw new Error('oops, I did not consider this case! fix me! id = ' + id)
 }
 
-function printDepTree (db, id) {
+function printDepTree (db, id, opts) {
+  opts = opts || {}
 
   var indent = 0
   print(id)
@@ -172,6 +184,9 @@ function printDepTree (db, id) {
   function print (id) {
     var task = db.tasks[id]
     var state = getTaskState(db, id)
+    if (state === 'done') {
+      return
+    }
     var sigil = getStateSymbol(state)
     var text = getStateTextColorFn(state)(task.description)
     console.log(whitespace(indent) + id + '   ' + sigil + ' ' + text)
