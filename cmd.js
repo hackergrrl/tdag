@@ -84,8 +84,9 @@ function exit (code) {
 }
 
 function load () {
-  if (fs.existsSync('todo.json')) {
-    return JSON.parse(fs.readFileSync('todo.json'))
+  var file = defined(args.f, args.file, 'todo.json')
+  if (fs.existsSync(file)) {
+    return JSON.parse(fs.readFileSync(file))
   } else {
     return {
       idx: 0,
@@ -95,6 +96,7 @@ function load () {
 }
 
 function save (db) {
+  var file = defined(args.f, args.file, 'todo.json')
   fs.writeFileSync('todo.json', JSON.stringify(db, null, 2))
 }
 
@@ -139,7 +141,12 @@ function getTaskState (db, id) {
     var task = db.tasks[id]
     if (task.state === 'done') return false
     else if (task.deps.length === 0) return true
-    else return task.deps.map(readySomewhere).some((v) => v === true)
+    else {
+      var states = task.deps.map(function (id) {
+        return getTaskState(db, id)
+      })
+      return states.some((state) => state === 'ready')
+    }
   }
 
   if (task.state === 'todo' && task.deps.every(done)) {
@@ -184,9 +191,9 @@ function printDepTree (db, id, opts) {
   function print (id) {
     var task = db.tasks[id]
     var state = getTaskState(db, id)
-    if (state === 'done') {
-      return
-    }
+    // if (state === 'done') {
+    //   return
+    // }
     var sigil = getStateSymbol(state)
     var text = getStateTextColorFn(state)(task.description)
     console.log(whitespace(indent) + id + '   ' + sigil + ' ' + text)
