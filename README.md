@@ -4,6 +4,8 @@
 
 > Manage tasks as a directed acyclic graph. Hardcore mode!
 
+<center><img src="http://tmp.stephenwhitmore.com/tdag.png"/></center>
+
 ## Table of Contents
 
 - [Background](#background)
