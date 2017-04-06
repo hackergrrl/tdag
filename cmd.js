@@ -6,8 +6,8 @@ var args = require('minimist')(process.argv)
 var defined = require('defined')
 var chalk = require('chalk')
 
-if (process.argv.length <= 2) {
-  exit(1)
+if (args.h || args.help) {
+  exit(0)
 }
 
 if (args._[2] === 'add') {
@@ -35,20 +35,6 @@ if (args._[2] === 'add') {
   save(db)
 
   console.log(idx + ': ' + description)
-
-  process.exit(0)
-}
-
-else if (args._[2] === 'query') {
-  var db = load()
-  Object.keys(db.tasks).forEach(function (id) {
-    var task = db.tasks[id]
-    if (getParents(db, id).length === 0) {
-      printDepTree(db, id)
-    }
-  })
-
-  process.exit(0)
 }
 
 else if (args._[2] === 'ready') {
@@ -79,6 +65,17 @@ else if (args._.length === 3) {
   var id = args._[2]
   var db = load()
   printDepTree(db, id)
+}
+
+// print top-level items
+else if (args._.length === 2) {
+  var db = load()
+  Object.keys(db.tasks).forEach(function (id) {
+    var task = db.tasks[id]
+    if (getParents(db, id).length === 0) {
+      printDepTree(db, id)
+    }
+  })
 }
 
 function exit (code) {

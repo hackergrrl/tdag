@@ -51,7 +51,10 @@ npm install -g tdag
 USAGE: tg
 
   tg
-    lists this help
+    print all top-level tasks
+
+  tg ID
+    print the dependency tree rooted at ID
 
   tg add "fix hyperlog dataset issues"
     insert task at root
@@ -59,18 +62,11 @@ USAGE: tg
   tg add ID "regen waoroni log /wo corruption"
     add task that is a dependency of todo #ID
 
-  tg ID
-    print the dependency tree rooted at ID
-
-  tg query
-    print all top-level tasks
-
   tg ready
     print all tasks that are ready to be worked on
 
   tg done ID
     mark a task as done
-
 ```
 
 ## Example Use
