@@ -10,7 +10,7 @@ if (args.h || args.help) {
   exit(0)
 }
 
-if (args._[2] === 'add') {
+if (args._[2] === 'add' || args._[2] === 'a') {
   var parentId = Number(args._[3])
   var description = args._.slice(4).join(' ')
   if (isNaN(parentId)) {
@@ -37,7 +37,7 @@ if (args._[2] === 'add') {
   console.log(idx + ': ' + description)
 }
 
-else if (args._[2] === 'ready') {
+else if (args._[2] === 'ready' || args._[2] === 'r') {
   var db = load()
   var tasks = getTopLevel(db)
 
