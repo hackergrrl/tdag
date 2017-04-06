@@ -198,7 +198,8 @@ function printDepTree (db, id, opts) {
     // }
     var sigil = getStateSymbol(state)
     var text = getStateTextColorFn(state)(task.description)
-    console.log(whitespace(indent) + id + '   ' + sigil + ' ' + text)
+    var padding = 4 - String(id).length
+    console.log(whitespace(indent) + id + whitespace(padding) + sigil + ' ' + text)
     var origIndent = indent + 2
     task.deps.forEach(function (id) {
       indent = origIndent
