@@ -43,7 +43,7 @@ else if (args._[2] === 'ready' || args._[2] === 'r') {
 
   var indent = 0
   tasks.forEach(function (id) {
-    printDepTree(db, id)
+    printDepTree(db, id, { hideBlocked: true })
   })
 }
 
@@ -57,6 +57,32 @@ else if (args._.length === 4 && args._[2] === 'done') {
     save(db)
   } else {
     console.log('Cannot mark DONE: task is blocked!')
+  }
+}
+
+else if (args._.length === 4 && args._[2] === 'block') {
+  var id = args._[3]
+  var db = load()
+  var task = db.tasks[id]
+  var state = getTaskState(db, id)
+  if (state !== 'done') {
+    task.state = 'blocked'
+    save(db)
+  } else {
+    console.log('Cannot mark BLOCKED: task is already done!')
+  }
+}
+
+else if (args._.length === 4 && args._[2] === 'unblock') {
+  var id = args._[3]
+  var db = load()
+  var task = db.tasks[id]
+  var state = getTaskState(db, id)
+  if (state === 'blocked') {
+    task.state = 'todo'
+    save(db)
+  } else {
+    console.log('Cannot mark UNBLOCKED: task isn\'t blocked!')
   }
 }
 
@@ -142,6 +168,7 @@ function getTaskState (db, id) {
   function readySomewhere (id) {
     var task = db.tasks[id]
     if (task.state === 'done') return false
+    else if (task.state === 'blocked') return false
     else if (task.deps.length === 0) return true
     else {
       var states = task.deps.map(function (id) {
@@ -151,7 +178,9 @@ function getTaskState (db, id) {
     }
   }
 
-  if (task.state === 'todo' && task.deps.every(done)) {
+  if (task.state === 'blocked') {
+    return 'blocked'
+  } else if (task.state === 'todo' && task.deps.every(done)) {
     return 'ready'
   } else if (readySomewhere(id)) {
     return 'semi-ready'
@@ -195,6 +224,9 @@ function printDepTree (db, id, opts) {
     var state = getTaskState(db, id)
 
     if (state === 'done') {
+      return
+    }
+    if (opts.hideBlocked && state === 'blocked') {
       return
     }
 

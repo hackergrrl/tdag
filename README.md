@@ -67,6 +67,10 @@ USAGE: tg
 
   tg done ID
     mark a task as done
+
+  tg block ID
+  tg unblock ID
+    mark a task as blocked or unblocked
 ```
 
 ## Example Use
