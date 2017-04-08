@@ -193,9 +193,11 @@ function printDepTree (db, id, opts) {
   function print (id) {
     var task = db.tasks[id]
     var state = getTaskState(db, id)
-    // if (state === 'done') {
-    //   return
-    // }
+
+    if (state === 'done') {
+      return
+    }
+
     var sigil = getStateSymbol(state)
     var text = getStateTextColorFn(state)(task.description)
     var padding = 4 - String(id).length
