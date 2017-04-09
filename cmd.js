@@ -114,7 +114,10 @@ function exit (code) {
 function load () {
   var file = defined(args.f, args.file, 'todo.json')
   if (fs.existsSync(file)) {
-    return JSON.parse(fs.readFileSync(file))
+    var db = JSON.parse(fs.readFileSync(file))
+    db.index = {}
+    db.index.parents = computeParents(db)
+    return db
   } else {
     return {
       idx: 0,
@@ -128,15 +131,21 @@ function save (db) {
   fs.writeFileSync('todo.json', JSON.stringify(db, null, 2))
 }
 
-function getParents (db, pid) {
-  var parents = []
+function computeParents (db) {
+  var idx = {}
   Object.keys(db.tasks).forEach(function (id) {
     var task = db.tasks[id]
-    if (task.deps.indexOf(Number(pid)) !== -1) {
-      parents.push(id)
-    }
+    if (!idx[id]) idx[id] = []
+    task.deps.forEach(function (did) {
+      if (!idx[did]) idx[did] = []
+      idx[did].push(id)
+    })
   })
-  return parents
+  return idx
+}
+
+function getParents (db, pid) {
+  return db.index.parents[pid]
 }
 
 function getTopLevel (db) {
