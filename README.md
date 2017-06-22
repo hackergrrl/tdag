@@ -4,7 +4,7 @@
 
 > Manage tasks as a directed acyclic graph. Hardcore mode!
 
-<center><img src="http://tmp.stephenwhitmore.com/tdag.png"/></center>
+<center><img src="https://github.com/noffle/tdag/raw/master/screenshot.png"/></center>
 
 ## Table of Contents
 
