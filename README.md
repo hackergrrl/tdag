@@ -59,7 +59,7 @@ USAGE: tg
   tg add "fix hyperlog dataset issues"
     insert task at root
 
-  tg add ID "regen waoroni log /wo corruption"
+  tg add ID "regenerate corrupted indexes"
     add task that is a dependency of todo #ID
 
   tg ready
