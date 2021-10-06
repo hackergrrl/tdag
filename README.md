@@ -1,10 +1,8 @@
 # tdag
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+> Manage tasks as a directed acyclic graph.
 
-> Manage tasks as a directed acyclic graph. Hardcore mode!
-
-<center><img src="https://github.com/noffle/tdag/raw/master/screenshot.png"/></center>
+<center><img src="https://github.com/hackergrrl/tdag/raw/master/screenshot.png"/></center>
 
 ## Table of Contents
 
@@ -106,12 +104,6 @@ in the future.
 in the future. However, tdag will always operate on *human readable text
 formats*!
 
-## Contribute
-
-PRs gladly accepted! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
-
-tdag follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
-
 ## License
 
-MIT © Stephen Whitmore
+MIT

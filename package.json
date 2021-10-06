@@ -1,16 +1,16 @@
 {
   "name": "tdag",
   "description": "manage tasks as a directed acyclic graph",
-  "author": "Stephen Whitmore <sww@eight.net>",
+  "author": "Kira Oakley <kira@eight.net>",
   "bin": {
     "tg": "cmd.js"
   },
   "version": "1.0.0",
   "repository": {
-    "url": "git://github.com/noffle/tdag.git"
+    "url": "git://github.com/hackergrrl/tdag.git"
   },
-  "homepage": "https://github.com/noffle/tdag",
-  "bugs": "https://github.com/noffle/tdag/issues",
+  "homepage": "https://github.com/hackergrrl/tdag",
+  "bugs": "https://github.com/hackergrrl/tdag/issues",
   "main": "index.js",
   "scripts": {
     "lint": "standard"
